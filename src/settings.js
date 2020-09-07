@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'SpringBoot Easy',
 
   /**
    * @type {boolean} true | false
