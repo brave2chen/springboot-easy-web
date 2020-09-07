@@ -63,55 +63,55 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
-        path: '/apps/examples/button',
+        path: '/example/button',
         component: () => import('@/views/examples/VButtonExample'),
         name: 'VButtonExample',
         meta: {title: 'VButtonExample'}
       },
       {
-        path: '/apps/examples/input',
+        path: '/example/input',
         component: () => import('@/views/examples/VInputExample'),
         name: 'VInputExample',
         meta: {title: 'VInputExample'}
       },
       {
-        path: '/apps/examples/form',
+        path: '/example/form',
         component: () => import('@/views/examples/VFormExample'),
         name: 'VFormExample',
         meta: {title: 'VFormExample'}
       },
       {
-        path: '/apps/examples/layout',
+        path: '/example/layout',
         component: () => import('@/views/examples/VLayoutExample'),
         name: 'VLayoutExample',
         meta: {title: 'VLayoutExample'}
       },
       {
-        path: '/apps/examples/charts',
+        path: '/example/charts',
         component: () => import('@/views/examples/VChartsExample'),
         name: 'VChartsExample',
         meta: {title: 'VChartsExample'}
       },
       {
-        path: '/apps/examples/table',
+        path: '/example/table',
         component: () => import('@/views/examples/VTableExample'),
         name: 'VTableExample',
         meta: {title: 'VTableExample'}
       },
       {
-        path: '/apps/examples/title',
+        path: '/example/title',
         component: () => import('@/views/examples/VTitleExample'),
         name: 'VTitleExample',
         meta: {title: 'VTitleExample'}
       },
       {
-        path: '/apps/examples/dialog',
+        path: '/example/dialog',
         component: () => import('@/views/examples/VDialogExample'),
         name: 'VDialogExample',
         meta: {title: 'VDialogExample'}
       },
       {
-        path: '/apps/examples/detail',
+        path: '/example/detail',
         component: () => import('@/views/examples/VDetailFormExample'),
         name: 'VDetailFormExample',
         meta: {title: 'VDetailFormExample'}
