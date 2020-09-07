@@ -1,3 +1,5 @@
+@import "./variables";
+
 // cover some element-ui styles
 
 .el-breadcrumb__inner,
@@ -46,4 +48,102 @@
 // to fix el-date-picker css style
 .el-range-separator {
   box-sizing: content-box;
+}
+
+// fix table header selection align
+th.el-table-column--selection .cell {
+  padding-left: 14px !important;;
+  padding-right: 14px !important;;
+}
+
+// 美化 el-tabs
+.el-tabs.el-tabs--top {
+  position: relative;
+
+  .el-tabs__header {
+    margin: 0;
+    padding: 0;
+  }
+
+  .el-tabs__content {
+    overflow: visible;
+  }
+
+  .el-tabs__nav-wrap {
+    padding: 0;
+
+    &.is-scrollable {
+      padding: 0 20px;
+    }
+  }
+
+  .el-tabs__active-bar.is-top {
+    padding: 0 10px;
+    box-sizing: content-box;
+    left: -10px;
+
+    &:first-child:nth-last-child(2) {
+      padding: 0;
+      left: 0;
+      transform: translateX(0px) !important;
+    }
+  }
+
+  .el-tabs__item {
+    padding: 0 10px;
+
+    &.is-top:nth-child(2) {
+      padding-left: 10px;
+    }
+
+    &.is-top:last-child {
+      padding-right: 10px;
+    }
+  }
+}
+
+// el-table限制最高4行
+.el-table .cell {
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: $tableCellLineHeight;
+  max-height: #{$tableCellMaxLine * $tableCellLineHeight};
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $tableCellMaxLine;
+}
+.el-table .cell .el-link {
+  display: inline;
+}
+
+// 修改el-dialog的样式
+.el-dialog .el-dialog__header {
+  padding: $gap $gap 0 $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding: $minGap $minGap 0 $minGap;
+  }
+  .el-dialog__headerbtn {
+    top: $gap;
+
+    @media screen and (max-width: $mediaWidth) {
+      top: $minGap;
+    }
+  }
+}
+.el-dialog .el-dialog__body,
+.el-dialog.el-dialog--center .el-dialog__body {
+  padding: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding: $minGap;
+  }
+}
+.el-dialog .el-dialog__title {
+  font-weight: bold;
+}
+
+// fix el-steps 描述，尽量不换行
+.el-step.is-horizontal.is-center .el-step__description {
+  padding: 0;
 }
