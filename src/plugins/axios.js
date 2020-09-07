@@ -3,30 +3,30 @@ import Vue from 'vue'
 import {Message, MessageBox} from 'element-ui'
 import store from '@/store'
 import {getToken} from '@/utils/auth'
-import Qs from 'qs';
+import Qs from 'qs'
 
 // Full config:  https://github.com/axios/axios#request-config
-axios.defaults.baseURL = process.env.VUE_APP_BASE_API || "";
-axios.defaults.withCredentials = true;
-axios.defaults.timeout = 5000;
+axios.defaults.baseURL = process.env.VUE_APP_BASE_API || ''
+axios.defaults.withCredentials = true
+axios.defaults.timeout = 5000
 
 // request interceptor
 axios.interceptors.request.use(
   config => {
     // params 转 QueryString
     if (config.params) {
-      const url = config.url || '';
-      const queryString = Qs.stringify(config.params, {arrayFormat: 'brackets'});
-      config.params = {};
-      config.url = `${url}${url.includes('?') && '&' || '?'}${queryString}`;
+      const url = config.url || ''
+      const queryString = Qs.stringify(config.params, {arrayFormat: 'brackets'})
+      config.params = {}
+      config.url = `${url}${url.includes('?') && '&' || '?'}${queryString}`
     }
     // post data Object 转为 FromData
     if (config.data && !(config.data instanceof FormData) && /application\/x-www-form-urlencoded/.test(config.headers['Content-Type'])) {
       const formData = new FormData()
       Object.entries(config.data).forEach(([key, value]) => {
-        value !== undefined && value !== null && formData.append(key, String(value));
+        value !== undefined && value !== null && formData.append(key, String(value))
       })
-      config.data = formData;
+      config.data = formData
     }
     // 添加TOKEN
     if (store.getters.token) {
@@ -82,7 +82,7 @@ axios.interceptors.response.use(
       duration: 5 * 1000
     })
 
-    const res = error.response;
+    const res = error.response
     if (res.status === 401 || res.status === 403) {
       // to re-login
       MessageBox.confirm('Session已超时或没有访问权限，退出重新登录吗', '退出重新登录', {
@@ -105,19 +105,19 @@ axios.interceptors.response.use(
 
 const Plugin = {
   install: Vue => {
-    Vue.$axios = axios;
+    Vue.$axios = axios
   }
-};
+}
 Plugin.install = Vue => {
-  Vue.$axios = axios;
-  window.axios = axios;
+  Vue.$axios = axios
+  window.axios = axios
   Object.defineProperties(Vue.prototype, {
     $axios: {
       get() {
-        return axios;
+        return axios
       }
     }
-  });
-};
+  })
+}
 
-Vue.use(Plugin);
+Vue.use(Plugin)

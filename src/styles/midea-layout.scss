@@ -1,0 +1,405 @@
+@import './variables.scss';
+
+/* 布局样式 */
+.page-wrapper {
+  background-color: $bgColor;
+  min-height: 100%;
+  padding: $gap;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding: $minGap;
+  }
+}
+
+.page-block {
+  background-color: #FFFFFF;
+  padding: $gap $gap 0 $gap;
+  flex: none;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding: $minGap $minGap 0 $minGap;
+  }
+
+  &.page-block--no-padding {
+    padding: 0;
+  }
+
+  &.page-block--bottom, &.page-block--no-padding.page-block--bottom {
+    padding-bottom: $gap;
+
+    @media screen and (max-width: $mediaWidth) {
+      padding-bottom: $minGap;
+    }
+  }
+
+  & + & {
+    margin-top: $gap;
+
+    @media screen and (max-width: $mediaWidth) {
+      margin-top: $minGap;
+    }
+  }
+
+  &.page-block--no-padding-top {
+    padding-top: 0;
+  }
+}
+
+.flex-box {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  align-items: stretch;
+  margin: 0 -#{$gap/2};
+
+  @media screen and (max-width: $mediaWidth) {
+    margin: 0 -#{$minGap/2};
+  }
+}
+
+.flex-box--column {
+  flex-direction: column;
+  margin: -#{$gap/2} 0;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin: -#{$minGap/2} 0;
+  }
+
+  & > .flex-item {
+    padding: #{$gap/2} 0;
+
+    @media screen and (max-width: $mediaWidth) {
+      padding: #{$minGap/2} 0;
+    }
+  }
+}
+
+.flex-box--row {
+  flex-direction: row;
+  margin: 0 -#{$gap/2};
+
+  @media screen and (max-width: $mediaWidth) {
+    margin: 0 -#{$minGap/2};
+  }
+
+  & > .flex-item {
+    padding: 0 #{$gap/2};
+
+    @media screen and (max-width: $mediaWidth) {
+      padding: 0 #{$minGap/2};
+    }
+  }
+}
+
+.flex-item {
+  flex: auto;
+  padding: 0 #{$gap/2};
+
+  @media screen and (max-width: $mediaWidth) {
+    padding: 0 #{$minGap/2};
+  }
+
+  & > div {
+    height: 100%;
+  }
+
+  &.flex-item__col-1 {
+    flex: 0 0 percentage(1/24)
+  }
+
+  &.flex-item__col-2 {
+    flex: 0 0 percentage(2/24)
+  }
+
+  &.flex-item__col-3 {
+    flex: 0 0 percentage(3/24)
+  }
+
+  &.flex-item__col-4 {
+    flex: 0 0 percentage(4/24)
+  }
+
+  &.flex-item__col-5 {
+    flex: 0 0 percentage(5/24)
+  }
+
+  &.flex-item__col-6 {
+    flex: 0 0 percentage(6/24)
+  }
+
+  &.flex-item__col-7 {
+    flex: 0 0 percentage(7/24)
+  }
+
+  &.flex-item__col-8 {
+    flex: 0 0 percentage(8/24)
+  }
+
+  &.flex-item__col-9 {
+    flex: 0 0 percentage(9/24)
+  }
+
+  &.flex-item__col-10 {
+    flex: 0 0 percentage(10/24)
+  }
+
+  &.flex-item__col-11 {
+    flex: 0 0 percentage(11/24)
+  }
+
+  &.flex-item__col-12 {
+    flex: 0 0 percentage(12/24)
+  }
+
+  &.flex-item__col-13 {
+    flex: 0 0 percentage(13/24)
+  }
+
+  &.flex-item__col-14 {
+    flex: 0 0 percentage(14/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(15/24)
+  }
+
+  &.flex-item__col-16 {
+    flex: 0 0 percentage(16/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(17/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(18/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(19/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(20/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(21/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(22/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(23/24)
+  }
+
+  &.flex-item__col-15 {
+    flex: 0 0 percentage(24/24)
+  }
+}
+
+.display-flex {
+  display: flex;
+}
+
+.flex-direction-row {
+  flex-direction: row;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flex-none {
+  flex: none;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.flexible {
+  flex: 1;
+  height: 0;
+  overflow-y: hidden;
+
+  &.scroll {
+    overflow-y: auto;
+  }
+}
+
+.padding-bottom {
+  padding-bottom: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-bottom: $minGap;
+  }
+}
+
+.padding-top {
+  padding-top: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-top: $minGap;
+  }
+}
+
+.padding-left {
+  padding-left: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-left: $minGap;
+  }
+}
+
+.padding-right {
+  padding-right: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-right: $minGap;
+  }
+}
+
+.padding-bottom--auto-none {
+  padding-bottom: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-bottom: 0;
+  }
+}
+
+.padding-top--auto-none {
+  padding-top: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-top: 0;
+  }
+}
+
+.padding-left--auto-none {
+  padding-left: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-left: 0;
+  }
+}
+
+.padding-right--auto-none {
+  padding-right: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    padding-left: 0;
+  }
+}
+
+.margin-bottom {
+  margin-bottom: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-bottom: $minGap;
+  }
+}
+
+.margin-top {
+  margin-top: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-top: $minGap;
+  }
+}
+
+.margin-left {
+  margin-left: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-left: $minGap;
+  }
+}
+
+.margin-right {
+  margin-right: $gap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-right: $minGap;
+  }
+}
+
+.margin-bottom--auto-none {
+  margin-bottom: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-bottom: 0;
+  }
+}
+
+.margin-top--auto-none {
+  margin-top: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-top: 0;
+  }
+}
+
+.margin-left--auto-none {
+  margin-left: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-left: 0;
+  }
+}
+
+.margin-right--auto-none {
+  margin-right: $minGap;
+
+  @media screen and (max-width: $mediaWidth) {
+    margin-left: 0;
+  }
+}
+
+.bg-dark {
+  background-color: $bgColor;
+}
+
+.bg-light {
+  background-color: $bgColorLight;
+}
+
+.bg-white {
+  background-color: $colorWhite;
+}
+
+.bg-black {
+  background-color: $colorBlack;
+}
+
+.color-primary {
+  color: $colorPrimary;
+}
+
+.color-success {
+  color: $colorSuccess;
+}
+
+.color-text-primary {
+  color: $colorTextPrimary;
+}
+
+.color-text-secondary {
+  color: $colorTextSecondary;
+}
+
+.color-text-regular {
+  color: $colorTextRegular;
+}
+
+.color-text-primary {
+  color: $colorTextPrimary;
+}
+
+.color-text-secondary {
+  color: $colorTextSecondary;
+}

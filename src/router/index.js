@@ -63,32 +63,62 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: '/apps/examples/button',
+        component: () => import('@/views/examples/VButtonExample'),
+        name: 'VButtonExample',
+        meta: {title: 'VButtonExample'}
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
+        path: '/apps/examples/input',
+        component: () => import('@/views/examples/VInputExample'),
+        name: 'VInputExample',
+        meta: {title: 'VInputExample'}
+      },
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: '/apps/examples/form',
+        component: () => import('@/views/examples/VFormExample'),
+        name: 'VFormExample',
+        meta: {title: 'VFormExample'}
+      },
+      {
+        path: '/apps/examples/layout',
+        component: () => import('@/views/examples/VLayoutExample'),
+        name: 'VLayoutExample',
+        meta: {title: 'VLayoutExample'}
+      },
+      {
+        path: '/apps/examples/charts',
+        component: () => import('@/views/examples/VChartsExample'),
+        name: 'VChartsExample',
+        meta: {title: 'VChartsExample'}
+      },
+      {
+        path: '/apps/examples/table',
+        component: () => import('@/views/examples/VTableExample'),
+        name: 'VTableExample',
+        meta: {title: 'VTableExample'}
+      },
+      {
+        path: '/apps/examples/title',
+        component: () => import('@/views/examples/VTitleExample'),
+        name: 'VTitleExample',
+        meta: {title: 'VTitleExample'}
+      },
+      {
+        path: '/apps/examples/dialog',
+        component: () => import('@/views/examples/VDialogExample'),
+        name: 'VDialogExample',
+        meta: {title: 'VDialogExample'}
+      },
+      {
+        path: '/apps/examples/detail',
+        component: () => import('@/views/examples/VDetailFormExample'),
+        name: 'VDetailFormExample',
+        meta: {title: 'VDetailFormExample'}
       }
     ]
   }
+
 ]
 
 /**
@@ -106,51 +136,7 @@ export const asyncRoutes = [
       icon: 'nested'
     },
     children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: 'menu2' }
-      }
+
     ]
   },
 

@@ -1,3 +1,45 @@
+/* 色彩定义 */
+$colorPrimary: #3879F5;
+$colorPrimary_left: #B6CFFF;
+$colorPrimary_right: #E9F0FF;
+
+$colorSuccess: #67C23A;
+$colorWarning: #E6A23B;
+$colorDanger: #F56C6C;
+$colorInfo: #909399;
+$colorAssist: #9E62F2;
+
+$colorWhite: #FFFFFF;
+$colorBlack: #000000;
+
+$colorTextPrimary: #303133;
+$colorTextRegular: #606266;
+$colorTextSecondary: $colorInfo;
+$colorTextPlaceholder: #C0C4CC;
+
+$borderColor: #DCDFE6;
+
+$dividerColor: #EBEEF5;
+
+$bgColor: #F0F2F5;
+$bgColorLight: #F5F7FA;
+
+/* 页面个部分分隔 */
+$gap: 16px;
+$minGap: 8px;
+$mediaWidth: 1280px;
+
+/* el-table */
+$tableHeaderBgColor: $bgColorLight;
+$tableCellLineHeight: 23px;
+$tableCellMaxLine: 4;
+
+/* 头部导航 */
+$navHeight: 50px;
+
+/* 页签 */
+$tagsViewHeight: 0;
+
 // sidebar
 $menuText:#bfcbd9;
 $menuActiveText:#409EFF;
@@ -10,10 +52,14 @@ $subMenuBg:#1f2d3d;
 $subMenuHover:#001528;
 
 $sideBarWidth: 210px;
+$sideBarCollapseWidth: 54px;
 
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
 :export {
+  navHeight: $navHeight;
+  tagsViewHeight: $tagsViewHeight;
+
   menuText: $menuText;
   menuActiveText: $menuActiveText;
   subMenuActiveText: $subMenuActiveText;
