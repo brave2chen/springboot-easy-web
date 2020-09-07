@@ -9,9 +9,9 @@
       v-on="$listeners"
       @cell-mouse-enter="handleCellMouseEnter"
     >
-      <template v-for="column in showColumns">
+      <template v-for="(column,index) in showColumns">
         <!--    show-overflow-tooltip 已覆盖实现，固定为false    -->
-        <el-table-column v-bind="column" :show-overflow-tooltip="false">
+        <el-table-column :key="index" v-bind="column" :show-overflow-tooltip="false">
           <template v-if="column.prop && $scopedSlots[column.prop]" v-slot="scope">
             <slot :name="column.prop" v-bind="scope" />
           </template>

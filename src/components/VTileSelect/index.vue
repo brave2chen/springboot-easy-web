@@ -17,7 +17,7 @@
         <table cellspacing="0" cellpadding="0" class="el-date-table" @click.stop="handleClick" @mousemove="handleMouseMove">
           <tbody>
             <tr v-for="(row, key) in tableRows" :key="key" class="el-date-table__row">
-              <td v-for="(cell, key) in row" :key="key" :class="getCellClasses(cell)">
+              <td v-for="(cell, key2) in row" :key="key2" :class="getCellClasses(cell)">
                 <div>
                   <span>{{ cell.label }}</span>
                 </div>

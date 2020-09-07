@@ -15,11 +15,10 @@ import router from './router'
 import '@/plugins/axios'
 import '@/plugins/permission'
 import components from '@/components/VComponents'
-Vue.use(components);
+Vue.use(components)
 
 import '@/icons' // icon
 import '@/permission' // permission control
-
 
 /**
  * If you don't want to use mock-server

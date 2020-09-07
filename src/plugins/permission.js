@@ -8,7 +8,7 @@ const hasPermission = (role) => {
 
 const permission = {
   inserted(el, binding, vnode) {
-    const {value, modifiers} = binding
+    const {value} = binding
 
     if (value && value.length > 0) {
       if (!hasPermission(value)) {

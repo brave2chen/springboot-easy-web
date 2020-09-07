@@ -13,10 +13,11 @@
       <el-row :gutter="gutter" type="flex" justify="space-between">
         <template v-for="(item, index) in items">
           <VFormItem
-            v-bind="item"
+            :key="index"
             :value="value(item)"
             :span="calculateSpan(item)"
             type="plainText"
+            v-bind="item"
           >
             <slot v-if="item.prop && $slots[item.prop]" :name="item.prop" v-bind="{item, index}" />
             <template v-else>
@@ -62,15 +63,12 @@
 
 <script>
 import {addResizeListener, removeResizeListener} from 'element-ui/src/utils/resize-event'
-import VFormItem from '@/components/VFormItem'
-import VInput from '@/components/VInput'
 import clipboard from '@/directives/clipboard'
 
 export default {
   name: 'VDetailForm',
 
   directives: {clipboard},
-  components: {VFormItem, VInput},
 
   inheritAttrs: false,
 
@@ -78,8 +76,6 @@ export default {
     model: Object,
 
     items: Array,
-
-    rules: {},
 
     labelWidth: {
       type: String,

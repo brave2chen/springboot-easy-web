@@ -62,9 +62,18 @@ import RepeatClick from 'element-ui/src/directives/repeat-click'
 export default {
   name: 'VInputNumber',
 
-  inheritAttrs: false,
+  directives: {
+    repeatClick: RepeatClick
+  },
+
+  components: {
+    ElInput
+  },
 
   mixins: [Focus('input')],
+
+  inheritAttrs: false,
+
   inject: {
     elForm: {
       default: ''
@@ -72,12 +81,6 @@ export default {
     elFormItem: {
       default: ''
     }
-  },
-  directives: {
-    repeatClick: RepeatClick
-  },
-  components: {
-    ElInput
   },
   props: {
     step: {

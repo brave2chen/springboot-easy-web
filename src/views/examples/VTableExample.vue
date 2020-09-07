@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       visible: false,
-      buttons: [{name: '新增', click: () => this.visible = true}]
+      buttons: [{name: '新增', click: () => { this.visible = true }}]
     }
   }
 }

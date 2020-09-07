@@ -65,7 +65,7 @@ export default {
   components: {VButton, VForm},
   data() {
     return {
-      data: [{label: '选项1', value: 1},{label: '选项2', value: 2},{label: '选项3', value: 3}],
+      data: [{label: '选项1', value: 1}, {label: '选项2', value: 2}, {label: '选项3', value: 3}],
       condition: {
         name: '',
         age: undefined,

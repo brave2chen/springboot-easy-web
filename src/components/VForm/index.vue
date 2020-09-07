@@ -7,7 +7,6 @@
       label-position="right"
       :model="model"
       :label-width="labelWidth"
-      :rules="rules"
       v-bind="$attrs"
       v-on="$listeners"
       @submit.native.prevent
@@ -15,6 +14,7 @@
       <el-row :gutter="gutter" type="flex" justify="space-between">
         <template v-for="(item, index) in items">
           <VFormItem
+            :key="index"
             v-model="model[item.prop]"
             v-bind="item"
             :span="calculateSpan(item)"
@@ -77,8 +77,6 @@ export default {
     model: Object,
 
     items: Array,
-
-    rules: {},
 
     labelWidth: {
       type: String,

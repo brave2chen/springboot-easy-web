@@ -213,6 +213,7 @@ export default {
       if (this.width) {
         return {width: typeof (this.width) === 'number' ? (this.width + 'px') : this.width}
       }
+      return {}
     }
   },
 
