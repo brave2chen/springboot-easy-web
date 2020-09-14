@@ -127,16 +127,21 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
-    path: '/nested',
+    path: '/manage',
     component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
+    redirect: '/manage/user',
+    name: 'Manage',
     meta: {
-      title: 'Nested',
+      title: '后台管理',
       icon: 'nested'
     },
     children: [
-
+      {
+        path: '/manage/user',
+        component: () => import('@/views/manage/user/UserManage'),
+        name: 'UserManage',
+        meta: {title: '用户管理', roles: ['SystemAdmin']}
+      }
     ]
   },
 

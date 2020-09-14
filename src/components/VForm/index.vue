@@ -194,6 +194,10 @@ export default {
     .v-form__operation {
       margin-bottom: $gap;
       text-align: center;
+
+      @media screen and (max-width: $mediaWidth) {
+        margin-bottom: $minGap;
+      }
     }
 
     .v-form__operation-button {

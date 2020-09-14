@@ -188,8 +188,6 @@ export default {
   .v-dialog-header {
     text-align: center;
     flex: none;
-    border-radius: 2px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     background-color: $colorWhite;
     position: relative;
     font-size: 14px;
@@ -215,11 +213,9 @@ export default {
     height: 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 -2px 12px 0 rgba(0, 0, 0, 0.1);
   }
 
   .v-dialog-footer {
-    box-shadow: 0 -2px 12px 0 rgba(0, 0, 0, 0.1);
     border-top: 1px solid $borderColor;
     background-color: $colorWhite;
     text-align: center;
@@ -269,6 +265,24 @@ export default {
       margin-right: 3px;
       color: $colorTextPrimary;
     }
+  }
+
+  .v-dialog-zoom-enter-active {
+    transform-origin: top right;
+  }
+  .v-dialog-zoom-leave-active {
+    transform-origin: top left;
+  }
+  .v-dialog-zoom-enter-active,
+  .v-dialog-zoom-leave-active {
+    opacity: 1;
+    transform: scale(1, 1);
+    transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .v-dialog-zoom-enter,
+  .v-dialog-zoom-leave-to {
+    opacity: 0;
+    transform: scale(.45, .45);
   }
 </style>
 

@@ -16,6 +16,11 @@ axios.interceptors.request.use(
     // params 转 QueryString
     if (config.params) {
       const url = config.url || ''
+      Object.entries(config.params).forEach(([k, v]) => {
+        if (Array.isArray(v)) {
+          config.params[k] = v.join(',')
+        }
+      })
       const queryString = Qs.stringify(config.params, {arrayFormat: 'brackets'})
       config.params = {}
       config.url = `${url}${url.includes('?') && '&' || '?'}${queryString}`
@@ -72,7 +77,7 @@ axios.interceptors.response.use(
       }
       return Promise.reject(new Error(res.msg || '服务异常'))
     }
-    return res.data !== undefined ? res : response
+    return res.code !== undefined ? res : response
   },
   error => {
     console.log('err' + error) // for debug

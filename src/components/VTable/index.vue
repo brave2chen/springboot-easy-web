@@ -372,7 +372,18 @@ export default {
     }
   }
 
-  .v-table.el-table .cell .el-link {
-    display: inline;
+  // el-table限制最高4行
+  .v-table.el-table .cell {
+    display: -webkit-box;
+    overflow: hidden;
+    line-height: $tableCellLineHeight;
+    max-height: #{$tableCellMaxLine * $tableCellLineHeight};
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $tableCellMaxLine;
+
+    .el-link {
+      display: inline;
+    }
   }
 </style>

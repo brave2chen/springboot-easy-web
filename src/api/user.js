@@ -11,9 +11,47 @@ export function login(data) {
   })
 }
 
+export function getInfo() {
+  return axios({
+    url: '/user/info',
+    method: 'get'
+  })
+}
+
 export function logout() {
   return axios({
     url: '/logout',
     method: 'post'
+  })
+}
+
+export function page(params) {
+  return axios({
+    url: '/user',
+    method: 'get',
+    params
+  })
+}
+
+export function save(data) {
+  return axios({
+    url: '/user',
+    method: 'post',
+    data
+  })
+}
+
+export function update(id, data) {
+  return axios({
+    url: `/user/${id}`,
+    method: 'put',
+    data
+  })
+}
+
+export function remove(id) {
+  return axios({
+    url: `/user/${id}`,
+    method: 'delete'
   })
 }

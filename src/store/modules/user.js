@@ -1,10 +1,11 @@
-import { login, logout } from '@/api/user'
+import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
     token: getToken(),
+    userInfo: null,
     name: '',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     roles: []
@@ -28,6 +29,9 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
+  },
+  SET_USER_INFO: (state, userInfo) => {
+    state.userInfo = userInfo
   }
 }
 
@@ -38,12 +42,38 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
-        commit('SET_TOKEN', `Basic ${data.token}`)
-        commit('SET_NAME', data.user)
-        commit('SET_ROLES', data.roles)
-        // commit('SET_AVATAR', avatar)
-        setToken(data.token)
+        const token = `Basic ${data.token}`
+        commit('SET_TOKEN', token)
+        setToken(token)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  // get user info
+  getInfo({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      getInfo().then(response => {
+        const { data } = response
+
+        if (!data) {
+          reject('获取个人信息失败，请重新登录！')
+        }
+
+        const { roles, nickname } = data
+
+        // roles must be a non-empty array
+        if (!roles || roles.length <= 0) {
+          reject('getInfo: roles must be a non-null array!')
+        }
+
+        commit('SET_ROLES', roles)
+        commit('SET_NAME', nickname)
+        // commit('SET_AVATAR', avatar)
+        commit('SET_USER_INFO', data)
+        resolve(data)
       }).catch(error => {
         reject(error)
       })
