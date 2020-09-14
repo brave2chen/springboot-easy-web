@@ -13,7 +13,7 @@ import router from './router'
 
 import '@/plugins/axios'
 import '@/plugins/permission'
-import components from '@/components/VComponents'
+import components from '@/components/index'
 Vue.use(components)
 
 import '@/icons' // icon
