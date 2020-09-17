@@ -2,14 +2,14 @@ import axios from 'axios'
 
 export function get(id) {
   return axios({
-    url: `/role/${id}`,
+    url: `/authority/${id}`,
     method: 'get'
   })
 }
 
 export function page(params) {
   return axios({
-    url: '/role',
+    url: '/authority',
     method: 'get',
     params
   })
@@ -17,7 +17,7 @@ export function page(params) {
 
 export function save(data) {
   return axios({
-    url: '/role',
+    url: '/authority',
     method: 'post',
     data
   })
@@ -25,7 +25,7 @@ export function save(data) {
 
 export function update(id, data) {
   return axios({
-    url: `/role/${id}`,
+    url: `/authority/${id}`,
     method: 'put',
     data
   })
@@ -33,15 +33,7 @@ export function update(id, data) {
 
 export function remove(id) {
   return axios({
-    url: `/role/${id}`,
+    url: `/authority/${id}`,
     method: 'delete'
-  })
-}
-
-export function setAuthorities(id, data) {
-  return axios({
-    url: `/role/${id}/authority`,
-    method: 'put',
-    data
   })
 }

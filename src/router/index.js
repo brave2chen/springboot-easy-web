@@ -141,6 +141,18 @@ export const asyncRoutes = [
         component: () => import('@/views/manage/user/UserManage'),
         name: 'UserManage',
         meta: {title: '用户管理', roles: ['SystemAdmin']}
+      },
+      {
+        path: '/manage/role',
+        component: () => import('@/views/manage/role/RoleManage'),
+        name: 'RoleManage',
+        meta: {title: '角色管理', roles: ['SystemAdmin']}
+      },
+      {
+        path: '/manage/authority',
+        component: () => import('@/views/manage/authority/AuthorityManage'),
+        name: 'AuthorityManage',
+        meta: {title: '权限管理', roles: ['SystemAdmin']}
       }
     ]
   },

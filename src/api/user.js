@@ -65,7 +65,7 @@ export function remove(id) {
 
 export function setRoles(id, data) {
   return axios({
-    url: `/user/${id}/roles`,
+    url: `/user/${id}/role`,
     method: 'put',
     data
   })

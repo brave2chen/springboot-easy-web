@@ -1,8 +1,8 @@
 <template>
-  <PageWrapper class="UserManage">
+  <PageWrapper class="RoleManage">
     <PageBlock>
       <VTitle :buttons="condition.buttons" :title="condition.title" border />
-      <VForm :model="condition.data" :items="conditionItems" label-width="50px" margin-top />
+      <VForm :model="condition.data" :items="conditionItems" margin-top />
     </PageBlock>
 
     <PageBlock class="display-flex flex-direction-column" flexible padding-bottom>
@@ -24,17 +24,17 @@
       </PageBlock>
     </VDialog>
 
-    <VDialog :visible.sync="roleForm.visible" :title="roleForm.title">
+    <VDialog :visible.sync="authorityForm.visible" :title="authorityForm.title">
       <PageBlock>
         <VForm
           style="width: 655px; margin: 0 auto;"
-          :model="roleForm.data"
+          :model="authorityForm.data"
           :items="[
-            {prop: 'username', label: '用户账号', type: 'input', readonly: true, line: true},
-            {prop: 'nickname', label: '用户昵称', type: 'input', readonly: true, line: true},
-            {prop: 'roles', label: '角色', type: 'transfer', line: true, data: roles, titles: ['未选择角色列表', '已选择角色列表']},
+            {prop: 'name', label: '角色账号', type: 'input', readonly: true, line: true},
+            {prop: 'code', label: '角色昵称', type: 'input', readonly: true, line: true},
+            {prop: 'authorities', label: '角色', type: 'transfer', line: true, data: authorities, titles: ['未选择角色列表', '已选择角色列表']},
           ]"
-          :buttons="roleForm.buttons"
+          :buttons="authorityForm.buttons"
         />
       </PageBlock>
     </VDialog>
@@ -43,15 +43,13 @@
 
 <script>
 
-import {getItems} from '@/api/direction'
-import {page, get, remove, save, setRoles, update} from '@/api/user'
-import {page as getRoles} from '@/api/role'
+import {page, get, remove, save, update, setAuthorities} from '@/api/role'
+import {page as getAuthorities} from '@/api/authority'
 
 export default {
   data() {
     return {
-      gender: [],
-      roles: [],
+      authorities: [],
 
       condition: {
         title: '查询条件',
@@ -64,23 +62,20 @@ export default {
       },
 
       table: {
-        title: '用户列表',
+        title: '角色列表',
         buttons: [
           {name: '新增', click: () => this.showSaveOrUpdateForm()}
         ],
         data: [],
         columns: [
-          {prop: 'username', label: '账号', type: 'input'},
-          {prop: 'mobile', label: '手机号码', type: 'input'},
-          {prop: 'email', label: '邮箱地址', type: 'input'},
-          {prop: 'nickname', label: '昵称', type: 'input'},
-          {prop: 'genderName', label: '性别', type: 'input'}
+          {prop: 'name', label: '角色名称'},
+          {prop: 'code', label: '角色代码'}
         ],
         operation: {
           buttons: [
             {icon: 'el-icon-edit', click: (row) => this.showSaveOrUpdateForm(row)},
             {icon: 'el-icon-delete', click: (row) => this.remove(row)},
-            {name: '角色设置', click: (row) => this.setRoles(row)}
+            {name: '权限设置', click: (row) => this.setAuthorities(row)}
           ]
         },
         pagination: {
@@ -92,7 +87,7 @@ export default {
 
       form: {
         visible: false,
-        title: '创建用户',
+        title: '创建角色',
         buttons: [
           {name: '取消', plain: true, click: () => (this.form.visible = false)},
           {name: '保存', click: () => this.saveOrUpdate()}
@@ -100,15 +95,15 @@ export default {
         data: {}
       },
 
-      roleForm: {
+      authorityForm: {
         visible: false,
-        title: '角色设置',
+        title: '权限设置',
         buttons: [
-          {name: '取消', plain: true, click: () => (this.roleForm.visible = false)},
-          {name: '保存', click: () => this.setRoles()}
+          {name: '取消', plain: true, click: () => (this.authorityForm.visible = false)},
+          {name: '保存', click: () => this.setAuthorities()}
         ],
         data: {
-          roles: []
+          authorities: []
         }
       }
     }
@@ -121,26 +116,20 @@ export default {
     },
     conditionItems() {
       return [
-        {prop: 'identity', label: '身份', type: 'input', placeholder: '请输入 账号/手机/邮箱/昵称'},
-        {prop: 'sex', label: '性别', type: 'select', multiple: true, data: this.gender}
+        {prop: 'name', label: '角色名称', type: 'input'},
+        {prop: 'code', label: '角色代码', type: 'input'}
       ]
     },
     formItems() {
       return [
-        {prop: 'username', label: '账号', type: 'input'},
-        {prop: 'password', label: '密码', type: 'password', autocomplete: 'new-password'},
-        {prop: 'mobile', label: '手机号码', type: 'input'},
-        {prop: 'email', label: '邮箱地址', type: 'input'},
-        {prop: 'nickname', label: '昵称', type: 'input'},
-        {prop: 'gender', label: '性别', type: 'select', data: this.gender}
+        {prop: 'name', label: '角色名称', type: 'input'},
+        {prop: 'code', label: '角色代码', type: 'input'}
       ]
     }
   },
 
   mounted() {
     this.loadData()
-
-    getItems('sex', true).then(gender => (this.gender = gender))
   },
 
   methods: {
@@ -155,7 +144,7 @@ export default {
       }
     },
     async showSaveOrUpdateForm(row = {}) {
-      this.form.title = row.id ? '修改用户信息' : '创建用户'
+      this.form.title = row.id ? '修改角色信息' : '创建角色'
       this.form.data = row
       this.form.visible = true
       this.$nextTick(() => this.$refs.form.clearValidate())
@@ -171,7 +160,7 @@ export default {
       await this.loadData(true)
     },
     async remove({id}) {
-      const action = await this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+      const action = await this.$confirm('此操作将永久删除该角色, 是否继续?', '提示', {
         confirmButtonText: '删除',
         cancelButtonText: '取消',
         type: 'warning'
@@ -183,22 +172,22 @@ export default {
       }
     },
 
-    async setRoles(row) {
-      if (this.roleForm.visible === false) {
-        this.roleForm.data = {}
-        this.roleForm.visible = true
+    async setAuthorities(row) {
+      if (this.authorityForm.visible === false) {
+        this.authorityForm.data = {}
+        this.authorityForm.visible = true
         const {data = {}} = await get(row.id)
-        this.roleForm.data = {...data, roles: (data.roles || []).map(role => role.id)}
+        this.authorityForm.data = {...data, authorities: (data.authorities || []).map(role => role.id)}
 
-        if (this.roles.length === 0) {
-          const {data = []} = await getRoles({pageSize: 1000})
-          this.roles = data.map(({id, name}) => ({label: name, key: id}))
+        if (this.authorities.length === 0) {
+          const {data = []} = await getAuthorities({pageSize: 1000})
+          this.authorities = data.map(({id, name}) => ({label: name, key: id}))
         }
         return
       }
-      await setRoles(this.roleForm.data.id, this.roleForm.data.roles)
+      await setAuthorities(this.authorityForm.data.id, this.authorityForm.data.authorities)
       this.$message.success('操作成功')
-      this.roleForm.visible = false
+      this.authorityForm.visible = false
       await this.loadData(true)
     }
   }
