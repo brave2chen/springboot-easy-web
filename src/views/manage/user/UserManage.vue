@@ -44,7 +44,7 @@
 <script>
 
 import {getItems} from '@/api/direction'
-import {page, remove, save, setRoles, update} from '@/api/user'
+import {page, get, remove, save, setRoles, update} from '@/api/user'
 import {page as getRoles} from '@/api/role'
 
 export default {
@@ -185,11 +185,10 @@ export default {
 
     async setRoles(row) {
       if (this.roleForm.visible === false) {
+        this.roleForm.data = {}
         this.roleForm.visible = true
-        this.roleForm.data.id = row.id
-        this.roleForm.data.username = row.username
-        this.roleForm.data.nickname = row.nickname
-        this.roleForm.data.roles = row.rolesId
+        const {data = {}} = await get(row.id);
+        this.roleForm.data = {...data, roles: data.roles.map(role => role.id)}
 
         if (this.roles.length === 0) {
           const {data = []} = await getRoles({pageSize: 1000})

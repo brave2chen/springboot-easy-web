@@ -33,6 +33,13 @@ export function page(params) {
   })
 }
 
+export function get(id) {
+  return axios({
+    url: `/user/${id}`,
+    method: 'get'
+  })
+}
+
 export function save(data) {
   return axios({
     url: '/user',

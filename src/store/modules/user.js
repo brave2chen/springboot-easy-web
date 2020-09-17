@@ -62,6 +62,8 @@ const actions = {
           reject('获取个人信息失败，请重新登录！')
         }
 
+        data.roles = (data.roles || []).map(role => role.code);
+
         const { roles, nickname } = data
 
         // roles must be a non-empty array
