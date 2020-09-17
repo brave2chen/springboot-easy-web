@@ -37,3 +37,10 @@ export function remove(id) {
     method: 'delete'
   })
 }
+
+export function refresh() {
+  return axios({
+    url: '/authority/refresh',
+    method: 'post',
+  })
+}

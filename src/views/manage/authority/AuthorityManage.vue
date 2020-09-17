@@ -28,7 +28,7 @@
 
 <script>
 
-import {page, remove, save, update} from '@/api/authority'
+import {page, remove, save, update, refresh} from '@/api/authority'
 
 const methods = [
   {label: '全部', value: ''},
@@ -53,7 +53,8 @@ export default {
       table: {
         title: '权限列表',
         buttons: [
-          {name: '新增', click: () => this.showSaveOrUpdateForm()}
+          {name: '新增', click: () => this.showSaveOrUpdateForm()},
+          {name: '重置缓存', click: () => this.refresh()},
         ],
         data: [],
         columns: [
@@ -149,6 +150,10 @@ export default {
         this.$message.success('操作成功')
         await this.loadData(true)
       }
+    },
+    async refresh() {
+      await refresh();
+      this.$message.success('操作成功')
     }
   }
 }
