@@ -8,3 +8,42 @@ export async function getItems(type, forceValueNumber = false) {
   }
   return []
 }
+
+
+export function get(id) {
+  return axios({
+    url: `/dictionary/${id}`,
+    method: 'get'
+  })
+}
+
+export function page(params) {
+  return axios({
+    url: '/dictionary',
+    method: 'get',
+    params
+  })
+}
+
+export function save(data) {
+  return axios({
+    url: '/dictionary',
+    method: 'post',
+    data
+  })
+}
+
+export function update(id, data) {
+  return axios({
+    url: `/dictionary/${id}`,
+    method: 'put',
+    data
+  })
+}
+
+export function remove(id) {
+  return axios({
+    url: `/dictionary/${id}`,
+    method: 'delete'
+  })
+}
