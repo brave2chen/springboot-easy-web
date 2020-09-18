@@ -35,7 +35,7 @@ axios.interceptors.request.use(
     }
     // 添加TOKEN
     if (store.getters.token) {
-      config.headers['Authorization'] = getToken()
+      config.headers['Authorization'] = `Bearer ${getToken()}`
     }
     return config
   },
