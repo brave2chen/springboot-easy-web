@@ -70,3 +70,27 @@ export function setRoles(id, data) {
     data
   })
 }
+
+export function getCode() {
+  return axios({
+    url: '/login',
+    method: 'get',
+  })
+}
+
+
+export function sendCode(mobile) {
+  return axios({
+    url: '/sms/login',
+    method: 'get',
+    params: {mobile},
+  })
+}
+
+export function smsLogin(data) {
+  return axios({
+    url: '/sms/login',
+    method: 'post',
+    params: data,
+  })
+}
