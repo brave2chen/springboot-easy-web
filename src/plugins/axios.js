@@ -7,8 +7,10 @@ import Qs from 'qs'
 
 // Full config:  https://github.com/axios/axios#request-config
 axios.defaults.baseURL = process.env.VUE_APP_BASE_API || ''
-axios.defaults.withCredentials = true
 axios.defaults.timeout = 5000
+
+// 需要发送cookies，请修改为false
+axios.defaults.withCredentials = false
 
 // request interceptor
 axios.interceptors.request.use(
