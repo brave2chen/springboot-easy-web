@@ -221,6 +221,7 @@ export default {
             this.loading = false
           }).catch(() => {
             this.loading = false
+            this.refreshImageCode()
           })
         } else {
           console.log('error submit!!')
