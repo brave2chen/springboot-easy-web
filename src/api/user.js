@@ -74,16 +74,15 @@ export function setRoles(id, data) {
 export function getCode() {
   return axios({
     url: '/login',
-    method: 'get',
+    method: 'get'
   })
 }
-
 
 export function sendCode(mobile) {
   return axios({
     url: '/sms/login',
     method: 'get',
-    params: {mobile},
+    params: {mobile}
   })
 }
 
@@ -91,6 +90,6 @@ export function smsLogin(data) {
   return axios({
     url: '/sms/login',
     method: 'post',
-    params: data,
+    params: data
   })
 }

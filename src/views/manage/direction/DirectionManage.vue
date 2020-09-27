@@ -44,7 +44,7 @@ export default {
       table: {
         title: '字典列表',
         buttons: [
-          {name: '新增', click: () => this.showSaveOrUpdateForm()},
+          {name: '新增', click: () => this.showSaveOrUpdateForm()}
         ],
         data: [],
         columns: [
@@ -52,13 +52,13 @@ export default {
           {prop: 'type', label: '字典类型'},
           {prop: 'itemName', label: '显示名'},
           {prop: 'itemValue', label: '存储值'},
-          {prop: 'description', label: '描述说明'},
+          {prop: 'description', label: '描述说明'}
         ],
         operation: {
           buttons: [
             {icon: 'el-icon-edit', click: (row) => this.showSaveOrUpdateForm(row, false)},
             {icon: 'el-icon-plus', click: (row) => this.showSaveOrUpdateForm(row, true)},
-            {icon: 'el-icon-delete', click: (row) => this.remove(row)},
+            {icon: 'el-icon-delete', click: (row) => this.remove(row)}
           ]
         },
         pagination: {
@@ -88,7 +88,7 @@ export default {
     conditionItems() {
       return [
         {prop: 'type', label: '字典类型', type: 'input'},
-        {prop: 'itemName', label: '显示名', type: 'input'},
+        {prop: 'itemName', label: '显示名', type: 'input'}
       ]
     },
     formItems() {
@@ -96,7 +96,7 @@ export default {
         {prop: 'type', label: '字典类型', type: 'input'},
         {prop: 'itemName', label: '显示名', type: 'input'},
         {prop: 'itemValue', label: '存储值', type: 'input'},
-        {prop: 'description', label: '描述说明', type: 'input'},
+        {prop: 'description', label: '描述说明', type: 'input'}
       ]
     }
   },
@@ -118,7 +118,7 @@ export default {
     },
     async showSaveOrUpdateForm(row = {sortId: this.table.pagination.total + 1}, addChild) {
       this.form.title = row.id ? addChild ? `新增字典[${row.itemName}]子项` : '修改字典信息' : '创建字典'
-      this.form.data = row.id && addChild ? {parentId: row.id, type: row.type, sortId: (row.children||[]).length + 1} : row
+      this.form.data = row.id && addChild ? {parentId: row.id, type: row.type, sortId: (row.children || []).length + 1} : row
       this.form.visible = true
       this.$nextTick(() => this.$refs.form.clearValidate())
     },
@@ -143,7 +143,7 @@ export default {
         this.$message.success('操作成功')
         await this.loadData(true)
       }
-    },
+    }
   }
 }
 </script>

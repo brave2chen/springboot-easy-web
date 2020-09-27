@@ -37,7 +37,7 @@ axios.interceptors.request.use(
     }
     // 添加TOKEN
     if (store.getters.token) {
-      config.headers['Authorization'] = `Bearer ${getToken()}`
+      config.headers['Authorization'] = `${getToken()}`
     }
     return config
   },
@@ -59,14 +59,9 @@ axios.interceptors.response.use(
     const res = response.data
 
     if (res.code !== 0) {
-      Message({
-        message: res.msg || '服务异常',
-        type: 'error',
-        duration: 5 * 1000
-      })
-
       if (res.code === 4001 || res.code === 4003) {
         // to re-login
+        !response.config.url.endsWith('/user/info') &&
         MessageBox.confirm('Session已超时或没有访问权限，退出重新登录吗', '退出重新登录', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
@@ -76,22 +71,24 @@ axios.interceptors.response.use(
             location.reload()
           })
         })
+      } else {
+        Message({
+          message: res.msg || '服务异常',
+          type: 'error',
+          duration: 5 * 1000
+        })
+        return Promise.reject(new Error(res.msg || '服务异常'))
       }
-      return Promise.reject(new Error(res.msg || '服务异常'))
     }
     return res.code !== undefined ? res : response
   },
   error => {
     console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
 
     const res = error.response
     if (res.status === 401 || res.status === 403) {
       // to re-login
+      !error.config.url.endsWith('/user/info') &&
       MessageBox.confirm('Session已超时或没有访问权限，退出重新登录吗', '退出重新登录', {
         confirmButtonText: '重新登录',
         cancelButtonText: '取消',
@@ -100,6 +97,12 @@ axios.interceptors.response.use(
         store.dispatch('user/resetToken').then(() => {
           location.reload()
         })
+      })
+    } else {
+      Message({
+        message: error.message,
+        type: 'error',
+        duration: 5 * 1000
       })
     }
 

@@ -9,7 +9,6 @@ export async function getItems(type, forceValueNumber = false) {
   return []
 }
 
-
 export function get(id) {
   return axios({
     url: `/dictionary/${id}`,

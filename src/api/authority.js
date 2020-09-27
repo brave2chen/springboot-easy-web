@@ -41,6 +41,6 @@ export function remove(id) {
 export function refresh() {
   return axios({
     url: '/authority/refresh',
-    method: 'post',
+    method: 'post'
   })
 }

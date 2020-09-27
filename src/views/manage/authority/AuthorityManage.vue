@@ -54,7 +54,7 @@ export default {
         title: '权限列表',
         buttons: [
           {name: '新增', click: () => this.showSaveOrUpdateForm()},
-          {name: '重置缓存', click: () => this.refresh()},
+          {name: '重置缓存', click: () => this.refresh()}
         ],
         data: [],
         columns: [
@@ -152,7 +152,7 @@ export default {
       }
     },
     async refresh() {
-      await refresh();
+      await refresh()
       this.$message.success('操作成功')
     }
   }

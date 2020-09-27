@@ -159,7 +159,7 @@ export const asyncRoutes = [
         component: () => import('@/views/manage/direction/DirectionManage'),
         name: 'DirectionManage',
         meta: {title: '字典管理', roles: ['SystemAdmin']}
-      },
+      }
     ]
   },
 
