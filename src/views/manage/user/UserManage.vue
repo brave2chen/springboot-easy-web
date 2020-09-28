@@ -10,7 +10,7 @@
       <VTable
         class="flexible"
         :data="table.data"
-        :columns="table.columns"
+        :columns="columns"
         :pagination="table.pagination"
         :operation="table.operation"
         autoresize
@@ -69,13 +69,6 @@ export default {
           {name: '新增', click: () => this.showSaveOrUpdateForm()}
         ],
         data: [],
-        columns: [
-          {prop: 'username', label: '账号', type: 'input'},
-          {prop: 'mobile', label: '手机号码', type: 'input'},
-          {prop: 'email', label: '邮箱地址', type: 'input'},
-          {prop: 'nickname', label: '昵称', type: 'input'},
-          {prop: 'genderName', label: '性别', type: 'input'}
-        ],
         operation: {
           buttons: [
             {icon: 'el-icon-edit', click: (row) => this.showSaveOrUpdateForm(row)},
@@ -115,6 +108,15 @@ export default {
   },
 
   computed: {
+    columns() {
+      return [
+        {prop: 'username', label: '账号', type: 'input'},
+        {prop: 'mobile', label: '手机号码', type: 'input'},
+        {prop: 'email', label: '邮箱地址', type: 'input'},
+        {prop: 'nickname', label: '昵称', type: 'input'},
+        {prop: 'gender', label: '性别', type: 'enum', data: this.gender}
+      ]
+    },
     params() {
       const {currentPage: pageIndex, pageSize} = this.table.pagination
       return {...this.condition.data, pageIndex, pageSize}
