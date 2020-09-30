@@ -15,6 +15,7 @@
         :operation="table.operation"
         autoresize
         show-index
+        @current-page-change="loadData()"
       />
     </PageBlock>
 

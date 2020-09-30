@@ -15,6 +15,7 @@
         :operation="table.operation"
         row-key="id"
         autoresize
+        @current-page-change="loadData()"
       />
     </PageBlock>
 

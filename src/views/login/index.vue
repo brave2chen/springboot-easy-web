@@ -208,6 +208,7 @@ export default {
       })
     },
     async refreshImageCode() {
+      this.loginForm.code = '';
       const {data: {k, v}} = await getCode()
       this.loginForm.key = k
       this.image = v

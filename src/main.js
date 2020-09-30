@@ -12,6 +12,8 @@ import store from './store'
 import router from './router'
 
 import '@/plugins/axios'
+import '@/plugins/axios.download'
+import '@/plugins/axios.upload'
 import '@/plugins/permission'
 import components from '@/components/index'
 Vue.use(components)
