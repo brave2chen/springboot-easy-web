@@ -78,7 +78,7 @@ export function getCode() {
   })
 }
 
-export function sendCode(mobile) {
+export function sendSmsCode(mobile) {
   return axios({
     url: '/sms/login',
     method: 'get',
@@ -89,6 +89,22 @@ export function sendCode(mobile) {
 export function smsLogin(data) {
   return axios({
     url: '/sms/login',
+    method: 'post',
+    params: data
+  })
+}
+
+export function sendEmailCode(email) {
+  return axios({
+    url: '/email/login',
+    method: 'get',
+    params: {email}
+  })
+}
+
+export function emailLogin(data) {
+  return axios({
+    url: '/email/login',
     method: 'post',
     params: data
   })

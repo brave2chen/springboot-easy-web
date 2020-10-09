@@ -1,4 +1,4 @@
-import { login, logout, getInfo, smsLogin } from '@/api/user'
+import { login, logout, getInfo, smsLogin, emailLogin } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
@@ -51,11 +51,26 @@ const actions = {
       })
     })
   },
-  // user login
+  // sms login
   smsLogin({ commit }, userInfo) {
     const { mobile, code } = userInfo
     return new Promise((resolve, reject) => {
       smsLogin({ mobile: mobile.trim(), code: code.trim() }).then(response => {
+        const { data } = response
+        const token = data.token
+        commit('SET_TOKEN', token)
+        setToken(token)
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  // email login
+  emailLogin({ commit }, userInfo) {
+    const { email, code } = userInfo
+    return new Promise((resolve, reject) => {
+      emailLogin({ email: email.trim(), code: code.trim() }).then(response => {
         const { data } = response
         const token = data.token
         commit('SET_TOKEN', token)

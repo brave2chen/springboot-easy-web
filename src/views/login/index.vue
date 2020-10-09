@@ -78,7 +78,7 @@
 
       <FlexBox class="tips">
         <FlexItem style="text-align: left">
-          <el-link type="primary">Email验证码登陆</el-link>
+          <el-link type="primary" @click="loginType='email'">Email验证码登陆</el-link>
         </FlexItem>
         <FlexItem style="text-align: right">
           <el-link type="primary" @click="loginType='mobile'">手机验证码登陆</el-link>
@@ -142,10 +142,74 @@
 
       <FlexBox class="tips">
         <FlexItem style="text-align: left">
-          <el-link type="primary">Email验证码登陆</el-link>
+          <el-link type="primary" @click="loginType='email'">Email验证码登陆</el-link>
         </FlexItem>
         <FlexItem style="text-align: right">
-          <el-link type="primary" @click="loginType='password'">密码登陆</el-link>
+          <el-link type="primary" @click="loginType='password'">密码验证登陆</el-link>
+        </FlexItem>
+      </FlexBox>
+    </el-form>
+
+    <el-form
+        v-else-if="loginType === 'email'"
+        ref="emailForm"
+        class="login-form"
+        :model="emailForm"
+        :rules="emailRules"
+        auto-complete="on"
+        label-position="left"
+    >
+      <div class="title-container">
+        <h3 class="title">登录 SpringBoot Easy</h3>
+      </div>
+
+      <el-form-item ref="email" prop="email">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+            key="email"
+            v-model="emailForm.email"
+            placeholder="请输入邮箱地址"
+            name="email"
+            type="text"
+            tabindex="1"
+            auto-complete="on"
+        />
+      </el-form-item>
+
+      <el-form-item prop="code">
+        <span class="svg-container">
+          <svg-icon icon-class="form" />
+        </span>
+        <el-input
+            ref="smsCode"
+            v-model="emailForm.code"
+            name="code"
+            tabindex="3"
+            auto-complete="off"
+            @keyup.enter.native="handleEmailLogin"
+        />
+        <span class="show-pwd">
+          <VButton @click="sendEmailCode">发送验证码</VButton>
+        </span>
+      </el-form-item>
+
+      <el-button
+          :loading="loading"
+          type="primary"
+          style="width:100%;margin-bottom:30px;"
+          @click.native.prevent="handleEmailLogin"
+      >
+        登 录
+      </el-button>
+
+      <FlexBox class="tips">
+        <FlexItem style="text-align: left">
+          <el-link type="primary" @click="loginType='mobile'">手机验证码登陆</el-link>
+        </FlexItem>
+        <FlexItem style="text-align: right">
+          <el-link type="primary" @click="loginType='password'">密码验证登陆</el-link>
         </FlexItem>
       </FlexBox>
     </el-form>
@@ -153,7 +217,7 @@
 </template>
 
 <script>
-import {getCode, sendCode} from '@/api/user'
+import {getCode, sendSmsCode, sendEmailCode} from '@/api/user'
 
 export default {
   name: 'Login',
@@ -168,7 +232,7 @@ export default {
         code: ''
       },
       loginRules: {
-        username: [{required: true, trigger: 'blur', message: '请输入用户账号'}],
+        username: [{required: true, trigger: 'blur', message: '请输入用户名'}],
         password: [{required: true, trigger: 'blur', message: '请输入用户密码'}],
         code: [{required: true, trigger: 'blur', message: '请输入验证码'}]
       },
@@ -178,6 +242,14 @@ export default {
       },
       mobileRules: {
         mobile: [{required: true, trigger: 'blur', message: '请输入手机号'}],
+        code: [{required: true, trigger: 'blur', message: '请输入验证码'}]
+      },
+      emailForm: {
+        email: 'admin@foxmail.com',
+        code: ''
+      },
+      emailRules: {
+        email: [{required: true, trigger: 'blur', message: '请输入邮箱地址'}],
         code: [{required: true, trigger: 'blur', message: '请输入验证码'}]
       },
       loading: false,
@@ -235,7 +307,8 @@ export default {
       if (!this.mobileForm.mobile) {
         return
       }
-      await sendCode(this.mobileForm.mobile)
+      await sendSmsCode(this.mobileForm.mobile)
+      this.$message.success("验证码发送成功")
     },
     handleSmsLogin() {
       this.$refs.mobileForm.validate(valid => {
@@ -252,7 +325,31 @@ export default {
           return false
         }
       })
-    }
+    },
+    async sendEmailCode() {
+      this.$refs.email.validate()
+      if (!this.emailForm.email) {
+        return
+      }
+      await sendEmailCode(this.emailForm.email)
+      this.$message.success("验证码发送成功")
+    },
+    handleEmailLogin() {
+      this.$refs.emailForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/emailLogin', this.emailForm).then(() => {
+            this.$router.push({path: this.redirect || '/'})
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
   }
 }
 </script>
