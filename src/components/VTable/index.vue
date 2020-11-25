@@ -10,8 +10,8 @@
       @cell-mouse-enter="handleCellMouseEnter"
     >
       <template v-for="(column,index) in showColumns">
-        <!--    show-overflow-tooltip 已覆盖实现，固定为false    -->
-        <el-table-column :key="index" v-bind="column" :show-overflow-tooltip="false">
+        <!--    show-overflow-tooltip 已覆盖实现    -->
+        <el-table-column :key="index" v-bind="column" :show-overflow-tooltip="!!showOverflowTooltip">
           <template v-if="column.prop && $scopedSlots[column.prop]" v-slot="scope">
             <slot :name="column.prop" v-bind="scope" />
           </template>
@@ -98,6 +98,7 @@ export default {
     columns: Array,
     showIndex: Boolean,
     showSelection: Boolean,
+    showOverflowTooltip: Boolean,
 
     /* 操作配置 {
         buttons: [
@@ -231,6 +232,7 @@ export default {
     },
     handleCellMouseEnter(row, column, cell, event) {
       this.$emit('cell-mouse-enter', row, column, cell, event)
+      if(!!this.showOverflowTooltip) return
 
       // 判断是否text-overflow, 如果是就显示tooltip
       const cellChild = event.target.querySelector('.cell')
@@ -260,6 +262,14 @@ export default {
         tooltip.setExpectedState(true)
         $tableBody.activateTooltip(tooltip)
       }
+    },
+    handleCellMouseLeave(row, column, cell, event) {
+      this.$emit('cell-mouse-leave', row, column, cell, event);
+      if(!!this.showOverflowTooltip) return
+
+      const $tableBody = this.$refs.table.$children[this.$refs.table.$children.length - 1];
+      const tooltip = $tableBody.$refs.tooltip;
+      tooltip && tooltip.hide();
     },
 
     // 代理ElTable的内部方法
