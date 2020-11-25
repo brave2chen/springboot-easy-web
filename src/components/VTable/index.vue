@@ -8,6 +8,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       @cell-mouse-enter="handleCellMouseEnter"
+      @cell-mouse-leave="handleCellMouseLeave"
     >
       <template v-for="(column,index) in showColumns">
         <!--    show-overflow-tooltip 已覆盖实现    -->
@@ -253,14 +254,18 @@ export default {
       if ((Math.floor(rangeWidth + padding) > Math.floor(cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) ||
           Math.floor(rangeHeight + paddingV) > Math.floor(cellChild.offsetHeight || cellChild.scrollHeight > cellChild.offsetHeight)
       ) && $tableBody.$refs.tooltip) {
-        const tooltip = $tableBody.$refs.tooltip
+        const tooltip = $tableBody.$refs.tooltip;
         // TODO 会引起整个 Table 的重新渲染，需要优化
-        $tableBody.tooltipContent = cell.innerText || cell.textContent
-        tooltip.referenceElm = cell
-        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none')
-        // tooltip.doDestroy();
-        tooltip.setExpectedState(true)
-        $tableBody.activateTooltip(tooltip)
+        tooltip.referenceElm = cell;
+        $tableBody.tooltipContent = cell.innerText || cell.textContent;
+        if(tooltip.showPopper) {
+          tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
+          tooltip.doDestroy(true);
+          tooltip.destroyPopper();
+          tooltip.handleClosePopper();
+        }
+        tooltip.setExpectedState(true);
+        $tableBody.activateTooltip(tooltip);
       }
     },
     handleCellMouseLeave(row, column, cell, event) {
