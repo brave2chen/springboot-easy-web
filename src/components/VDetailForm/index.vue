@@ -16,7 +16,7 @@
             :key="index"
             :value="value(item)"
             :span="calculateSpan(item)"
-            type="plainText"
+            type="plaintext"
             v-bind="item"
           >
             <slot v-if="item.prop && $slots[item.prop]" :name="item.prop" v-bind="{item, index}" />
@@ -147,8 +147,8 @@ export default {
       if (value === undefined || value === '' || value === null) {
         return ''
       }
-      if (String(value).includes(',')) {
-        value = value.split(',')
+      if(String(value).includes(',')) {
+        value = String(value).split(',');
       }
       if (Array.isArray(value)) {
         return Array.from(new Set(value.map(v => enums.filter(type => this.getValue(type) == v).map(type => this.getLabel(type))[0] || defaultValue))).join(',')

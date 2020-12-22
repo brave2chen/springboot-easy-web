@@ -81,7 +81,7 @@
         </el-col>
 
         <el-col>
-          <VInput value="普通文本" type="plainText" />
+          <VInput value="普通文本" type="plaintext" />
         </el-col>
 
       </el-row>

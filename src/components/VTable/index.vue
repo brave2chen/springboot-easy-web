@@ -17,7 +17,7 @@
             <slot :name="column.prop" v-bind="scope" />
           </template>
           <template v-else-if="column.type === 'enum'" v-slot="{row}">
-            {{ transEnum(column.data, row[column.prop]) }}
+            {{ transEnum(column.data, row[column.prop], row[column.prop]) }}
           </template>
           <template v-else-if="column.type === 'tag'" v-slot="{row}">
             <el-tag
@@ -217,8 +217,8 @@ export default {
       if (value === undefined || value === '' || value === null) {
         return ''
       }
-      if (String(value).includes(',')) {
-        value = value.split(',')
+      if(String(value).includes(',')) {
+        value = String(value).split(',');
       }
       if (Array.isArray(value)) {
         return Array.from(new Set(value.map(v => enums.filter(type => this.getValue(type) == v).map(type => this.getLabel(type))[0] || defaultValue))).join(',')
@@ -351,8 +351,12 @@ export default {
     vertical-align: top;
   }
 
-  .v-table__operate-button {
+  .v-table__operate-button.el-button {
     position: relative;
+
+    [class*="el-icon-"]+span {
+      margin-left: -1px;
+    }
   }
 
   .v-table__load-more {

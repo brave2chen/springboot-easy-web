@@ -39,7 +39,7 @@
     </template>
 
     <slot v-if="componentType === 'VButton'">{{ innerProps.name||value }}</slot>
-    <slot v-if="componentType === 'span'">{{ value }}</slot>
+    <slot v-if="componentType === 'span'">{{innerProps.plaintext||value}}</slot>
 
     <!--  input、number  -->
     <template v-if="getIconPath(prefix) || $slots.prefix" v-slot:prefix>
@@ -167,7 +167,7 @@ export default {
 
         tileSelect: 'VTileSelect',
 
-        plainText: 'span',
+        plaintext: 'span',
         button: 'VButton'
       })[this.type]
     },

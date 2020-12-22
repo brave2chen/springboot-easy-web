@@ -1,30 +1,31 @@
-<script type="text/jsx">
-export default {
-  name: 'FlexBox',
-  functional: true,
-  props: {
-    direction: {
-      type: String,
-      default: 'row',
-      validate(value) {
-        return ['row', 'column'].includes(value)
+<template>
+  <div :class="['flex-box', directionClass, colClass]" :style="{flex}">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'FlexBox',
+    props: {
+      direction: {
+        type: String,
+        default: 'row',
+        validate(value) {
+          return ['row', 'column'].includes(value);
+        }
+      },
+      // 网格系统同el-col
+      span: Number,
+      flex: String,
+    },
+    computed: {
+      directionClass() {
+        return 'flex-box--' + (this.direction === 'row' ? 'row' : 'column');
+      },
+      colClass() {
+        return this.span ? 'flex-item__col-' + this.span : undefined;
       }
     },
-    // 网格系统同el-col
-    span: Number,
-    flex: String
-  },
-  render(h, context) {
-    const {direction, span, flex} = context.props
-    const directionClass = 'flex-box--' + (direction === 'row' ? 'row' : 'column')
-    const colClass = span ? 'flex-item__col-' + span : undefined
-
-    return (<div
-      class={['flex-box', directionClass, colClass, context.data.staticClass, context.data.class]}
-      style={[{flex}, context.data.staticStyle, context.data.style]}
-    >
-      {context.children}
-    </div>)
   }
-}
 </script>

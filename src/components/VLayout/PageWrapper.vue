@@ -1,5 +1,5 @@
-<template functional>
-  <div :class="['page-wrapper', data.staticClass, data.class]" :style="[data.staticStyle, data.style]">
-    <slot />
+<template>
+  <div class="page-wrapper">
+    <slot></slot>
   </div>
 </template>
