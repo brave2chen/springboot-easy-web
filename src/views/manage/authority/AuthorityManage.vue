@@ -95,9 +95,9 @@ export default {
     },
     conditionItems() {
       return [
-        {prop: 'name', label: '权限名称', type: 'input'},
-        {prop: 'method', label: '请求方法', type: 'select', data: methods},
-        {prop: 'path', label: '请求路径', type: 'input'}
+        {prop: 'name', label: '权限名称', type: 'input', span: 8, clearable: true},
+        {prop: 'method', label: '请求方法', type: 'select', data: methods, span: 8, clearable: true},
+        {prop: 'path', label: '请求路径', type: 'input', span: 8, clearable: true}
       ]
     },
     formItems() {

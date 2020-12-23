@@ -88,8 +88,8 @@ export default {
     },
     conditionItems() {
       return [
-        {prop: 'type', label: '字典类型', type: 'input'},
-        {prop: 'itemName', label: '显示名', type: 'input'}
+        {prop: 'type', label: '字典类型', type: 'input', clearable: true},
+        {prop: 'itemName', label: '显示名', type: 'input', clearable: true}
       ]
     },
     formItems() {

@@ -33,7 +33,7 @@
           :items="[
             {prop: 'name', label: '角色账号', type: 'input', readonly: true, line: true},
             {prop: 'code', label: '角色昵称', type: 'input', readonly: true, line: true},
-            {prop: 'authorities', label: '角色', type: 'transfer', line: true, data: authorities, titles: ['未选择角色列表', '已选择角色列表']},
+            {prop: 'authorities', label: '角色', type: 'transfer', line: true, data: authorities, titles: ['未授权资源', '已授权资源']},
           ]"
           :buttons="authorityForm.buttons"
         />
@@ -117,8 +117,8 @@ export default {
     },
     conditionItems() {
       return [
-        {prop: 'name', label: '角色名称', type: 'input'},
-        {prop: 'code', label: '角色代码', type: 'input'}
+        {prop: 'name', label: '角色名称', type: 'input', clearable: true},
+        {prop: 'code', label: '角色代码', type: 'input', clearable: true}
       ]
     },
     formItems() {

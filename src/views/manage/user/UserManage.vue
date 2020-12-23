@@ -33,7 +33,7 @@
           :items="[
             {prop: 'username', label: '用户账号', type: 'input', readonly: true, line: true},
             {prop: 'nickname', label: '用户昵称', type: 'input', readonly: true, line: true},
-            {prop: 'roles', label: '角色', type: 'transfer', line: true, data: roles, titles: ['未选择角色列表', '已选择角色列表']},
+            {prop: 'roles', label: '角色', type: 'transfer', line: true, data: roles, titles: ['未授权角色', '已授权角色']},
           ]"
           :buttons="roleForm.buttons"
         />
@@ -124,8 +124,8 @@ export default {
     },
     conditionItems() {
       return [
-        {prop: 'identity', label: '身份', type: 'input', placeholder: '请输入 账号/手机/邮箱/昵称'},
-        {prop: 'sex', label: '性别', type: 'select', multiple: true, data: this.gender}
+        {prop: 'identity', label: '身份', type: 'input', placeholder: '请输入 账号/手机/邮箱/昵称', clearable: true},
+        {prop: 'sex', label: '性别', type: 'select', multiple: true, data: this.gender, clearable: true}
       ]
     },
     formItems() {
